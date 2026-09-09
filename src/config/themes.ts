@@ -1,0 +1,248 @@
+import { ThemePresetId, CardStyle, ButtonShape, BgStyle, FontChoice } from '@/types/config';
+
+export interface ThemePresetDefinition {
+  id: ThemePresetId;
+  name: string;
+  description: string;
+  bgStyle: BgStyle;
+  cardStyle: CardStyle;
+  buttonShape: ButtonShape;
+  fontFamily: FontChoice;
+  accentColor: string;
+  glowEnabled: boolean;
+  previewColors: [string, string, string]; // 3 representative hex colors for preview chips
+  cssVars: {
+    '--bg-base': string;
+    '--bg-gradient': string;
+    '--card-bg': string;
+    '--card-hover-bg': string;
+    '--card-border': string;
+    '--card-hover-border': string;
+    '--card-shadow': string;
+    '--text-primary': string;
+    '--text-secondary': string;
+    '--text-muted': string;
+    '--accent': string;
+    '--accent-glow': string;
+    '--avatar-border': string;
+  };
+}
+
+export const THEME_PRESETS: Record<ThemePresetId, ThemePresetDefinition> = {
+  'midnight-glass': {
+    id: 'midnight-glass',
+    name: 'Midnight Glass',
+    description: 'Frosted obsidian glass with cyan neon glow and deep indigo backdrop',
+    bgStyle: 'aurora-mesh',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-2xl',
+    fontFamily: 'sans',
+    accentColor: '#38bdf8',
+    glowEnabled: true,
+    previewColors: ['#0f172a', '#38bdf8', '#818cf8'],
+    cssVars: {
+      '--bg-base': '#080c16',
+      '--bg-gradient': 'radial-gradient(ellipse 80% 80% at 50% -20%, rgba(56,189,248,0.25), rgba(99,102,241,0.15), rgba(8,12,22,1) 85%)',
+      '--card-bg': 'rgba(15, 23, 42, 0.65)',
+      '--card-hover-bg': 'rgba(30, 41, 59, 0.85)',
+      '--card-border': 'rgba(56, 189, 248, 0.2)',
+      '--card-hover-border': 'rgba(56, 189, 248, 0.6)',
+      '--card-shadow': '0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+      '--text-primary': '#f8fafc',
+      '--text-secondary': '#94a3b8',
+      '--text-muted': '#64748b',
+      '--accent': '#38bdf8',
+      '--accent-glow': 'rgba(56, 189, 248, 0.35)',
+      '--avatar-border': '#38bdf8',
+    },
+  },
+  'cyberpunk-neon': {
+    id: 'cyberpunk-neon',
+    name: 'Cyberpunk Neon',
+    description: 'High voltage cyberpunk aesthetic with electric magenta, neon yellow, and pitch black',
+    bgStyle: 'cosmic-grid',
+    cardStyle: 'glow',
+    buttonShape: 'rounded-xl',
+    fontFamily: 'mono',
+    accentColor: '#f43f5e',
+    glowEnabled: true,
+    previewColors: ['#09090b', '#f43f5e', '#eab308'],
+    cssVars: {
+      '--bg-base': '#050508',
+      '--bg-gradient': 'linear-gradient(135deg, #09090b 0%, #17041a 45%, #050508 100%)',
+      '--card-bg': 'rgba(18, 12, 28, 0.8)',
+      '--card-hover-bg': 'rgba(35, 18, 50, 0.95)',
+      '--card-border': 'rgba(244, 63, 94, 0.35)',
+      '--card-hover-border': 'rgba(234, 179, 8, 0.9)',
+      '--card-shadow': '0 0 25px -3px rgba(244, 63, 94, 0.25), 0 0 10px -2px rgba(234, 179, 8, 0.2)',
+      '--text-primary': '#fff1f2',
+      '--text-secondary': '#fda4af',
+      '--text-muted': '#be123c',
+      '--accent': '#f43f5e',
+      '--accent-glow': 'rgba(244, 63, 94, 0.5)',
+      '--avatar-border': '#f43f5e',
+    },
+  },
+  'aurora-borealis': {
+    id: 'aurora-borealis',
+    name: 'Aurora Borealis',
+    description: 'Luminous emerald and deep teal ethereal night sky with gentle ambient shimmer',
+    bgStyle: 'aurora-mesh',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-2xl',
+    fontFamily: 'sans',
+    accentColor: '#10b981',
+    glowEnabled: true,
+    previewColors: ['#022c22', '#10b981', '#06b6d4'],
+    cssVars: {
+      '--bg-base': '#041613',
+      '--bg-gradient': 'radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.18), #041613 75%)',
+      '--card-bg': 'rgba(6, 44, 38, 0.55)',
+      '--card-hover-bg': 'rgba(10, 64, 55, 0.8)',
+      '--card-border': 'rgba(16, 185, 129, 0.25)',
+      '--card-hover-border': 'rgba(52, 211, 153, 0.7)',
+      '--card-shadow': '0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(52, 211, 153, 0.2)',
+      '--text-primary': '#ecfdf5',
+      '--text-secondary': '#a7f3d0',
+      '--text-muted': '#34d399',
+      '--accent': '#10b981',
+      '--accent-glow': 'rgba(16, 185, 129, 0.4)',
+      '--avatar-border': '#10b981',
+    },
+  },
+  'sunset-horizon': {
+    id: 'sunset-horizon',
+    name: 'Sunset Horizon',
+    description: 'Warm twilight gradient fading from violet to golden amber glow',
+    bgStyle: 'gradient-glow',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-full',
+    fontFamily: 'sans',
+    accentColor: '#f97316',
+    glowEnabled: true,
+    previewColors: ['#1e112a', '#f97316', '#ec4899'],
+    cssVars: {
+      '--bg-base': '#13091e',
+      '--bg-gradient': 'linear-gradient(180deg, #240c34 0%, #1e0926 40%, #0f0516 100%)',
+      '--card-bg': 'rgba(42, 17, 58, 0.6)',
+      '--card-hover-bg': 'rgba(64, 25, 87, 0.85)',
+      '--card-border': 'rgba(249, 115, 22, 0.25)',
+      '--card-hover-border': 'rgba(236, 72, 153, 0.75)',
+      '--card-shadow': '0 8px 32px rgba(249, 115, 22, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.15)',
+      '--text-primary': '#fff7ed',
+      '--text-secondary': '#fed7aa',
+      '--text-muted': '#fb923c',
+      '--accent': '#f97316',
+      '--accent-glow': 'rgba(249, 115, 22, 0.45)',
+      '--avatar-border': '#f97316',
+    },
+  },
+  'minimal-luxe': {
+    id: 'minimal-luxe',
+    name: 'Minimalist Luxe',
+    description: 'Understated matte obsidian with warm champagne gold borders and clean editorial type',
+    bgStyle: 'minimal-solid',
+    cardStyle: 'outline',
+    buttonShape: 'rounded-xl',
+    fontFamily: 'serif',
+    accentColor: '#d4af37',
+    glowEnabled: false,
+    previewColors: ['#121212', '#d4af37', '#e5e5e5'],
+    cssVars: {
+      '--bg-base': '#0d0d0d',
+      '--bg-gradient': 'linear-gradient(180deg, #141414 0%, #0a0a0a 100%)',
+      '--card-bg': 'rgba(22, 22, 22, 0.85)',
+      '--card-hover-bg': 'rgba(30, 30, 30, 0.95)',
+      '--card-border': 'rgba(212, 175, 55, 0.3)',
+      '--card-hover-border': 'rgba(212, 175, 55, 0.8)',
+      '--card-shadow': '0 4px 20px rgba(0, 0, 0, 0.6)',
+      '--text-primary': '#fafaf9',
+      '--text-secondary': '#d6d3d1',
+      '--text-muted': '#a8a29e',
+      '--accent': '#d4af37',
+      '--accent-glow': 'rgba(212, 175, 55, 0.25)',
+      '--avatar-border': '#d4af37',
+    },
+  },
+  'retro-synthwave': {
+    id: 'retro-synthwave',
+    name: 'VCET Cosmic Violet',
+    description: 'Official VCET NSDC dark aesthetic with cosmic violet, electric indigo and frosted glass',
+    bgStyle: 'aurora-mesh',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-2xl',
+    fontFamily: 'sans',
+    accentColor: '#a855f7',
+    glowEnabled: true,
+    previewColors: ['#0b0b14', '#a855f7', '#3b82f6'],
+    cssVars: {
+      '--bg-base': '#0b0b14',
+      '--bg-gradient': 'radial-gradient(ellipse 80% 80% at 50% -20%, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), #0b0b14 85%)',
+      '--card-bg': 'rgba(15, 17, 28, 0.72)',
+      '--card-hover-bg': 'rgba(26, 29, 46, 0.92)',
+      '--card-border': 'rgba(168, 85, 247, 0.25)',
+      '--card-hover-border': 'rgba(168, 85, 247, 0.75)',
+      '--card-shadow': '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)',
+      '--text-primary': '#ffffff',
+      '--text-secondary': '#e2e8f0',
+      '--text-muted': '#a78bfa',
+      '--accent': '#a855f7',
+      '--accent-glow': 'rgba(168, 85, 247, 0.45)',
+      '--avatar-border': '#a855f7',
+    },
+  },
+  'emerald-dark': {
+    id: 'emerald-dark',
+    name: 'Obsidian Emerald',
+    description: 'Deep forest obsidian with electric mint accents and modern developer aesthetic',
+    bgStyle: 'aurora-mesh',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-xl',
+    fontFamily: 'sans',
+    accentColor: '#34d399',
+    glowEnabled: true,
+    previewColors: ['#021d15', '#34d399', '#6ee7b7'],
+    cssVars: {
+      '--bg-base': '#04120e',
+      '--bg-gradient': 'radial-gradient(circle at 50% 0%, #064e3b 0%, #04120e 70%)',
+      '--card-bg': 'rgba(4, 30, 23, 0.65)',
+      '--card-hover-bg': 'rgba(6, 45, 34, 0.85)',
+      '--card-border': 'rgba(52, 211, 153, 0.22)',
+      '--card-hover-border': 'rgba(52, 211, 153, 0.65)',
+      '--card-shadow': '0 8px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(52, 211, 153, 0.15)',
+      '--text-primary': '#f0fdf4',
+      '--text-secondary': '#bbf7d0',
+      '--text-muted': '#4ade80',
+      '--accent': '#34d399',
+      '--accent-glow': 'rgba(52, 211, 153, 0.35)',
+      '--avatar-border': '#34d399',
+    },
+  },
+  'lavender-dream': {
+    id: 'lavender-dream',
+    name: 'Lavender Mist',
+    description: 'Dreamy soft twilight with pastel mauve, periwinkle highlights and ethereal mood',
+    bgStyle: 'gradient-glow',
+    cardStyle: 'glass',
+    buttonShape: 'rounded-2xl',
+    fontFamily: 'sans',
+    accentColor: '#a78bfa',
+    glowEnabled: true,
+    previewColors: ['#1e1b2e', '#a78bfa', '#c4b5fd'],
+    cssVars: {
+      '--bg-base': '#110e1c',
+      '--bg-gradient': 'radial-gradient(circle at 50% 0%, #31274d 0%, #1a162b 50%, #110e1c 100%)',
+      '--card-bg': 'rgba(33, 27, 54, 0.65)',
+      '--card-hover-bg': 'rgba(46, 38, 77, 0.85)',
+      '--card-border': 'rgba(167, 139, 250, 0.25)',
+      '--card-hover-border': 'rgba(167, 139, 250, 0.7)',
+      '--card-shadow': '0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+      '--text-primary': '#f5f3ff',
+      '--text-secondary': '#ddd6fe',
+      '--text-muted': '#8b5cf6',
+      '--accent': '#a78bfa',
+      '--accent-glow': 'rgba(167, 139, 250, 0.4)',
+      '--avatar-border': '#a78bfa',
+    },
+  },
+};
