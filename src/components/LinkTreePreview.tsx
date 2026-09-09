@@ -19,20 +19,20 @@ export function LinkTreePreview() {
   const activeLinks = config.links.filter((l) => l.isActive);
   const activeSocials = config.socials.filter((s) => s.enabled && s.url);
 
-  // Social badge styling matching vcet-nsdc.vercel.app
+  // Social badge styling matching vcet-nsdc.vercel.app with vibrant brand glows
   const getSocialBrandStyle = (platform: string) => {
     switch (platform) {
       case 'email':
-        return 'border-red-500/40 text-red-400 hover:bg-red-500/10 hover:shadow-[0_0_18px_rgba(239,68,68,0.5)] hover:border-red-500/80';
+        return 'border-red-500/40 text-red-400 hover:bg-red-500/15 hover:shadow-[0_0_22px_rgba(239,68,68,0.6)] hover:border-red-500/90';
       case 'linkedin':
-        return 'border-blue-500/40 text-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_18px_rgba(59,130,246,0.5)] hover:border-blue-500/80';
+        return 'border-blue-500/40 text-blue-400 hover:bg-blue-500/15 hover:shadow-[0_0_22px_rgba(59,130,246,0.6)] hover:border-blue-500/90';
       case 'youtube':
-        return 'border-red-500/40 text-red-400 hover:bg-red-500/10 hover:shadow-[0_0_18px_rgba(239,68,68,0.5)] hover:border-red-500/80';
+        return 'border-red-500/40 text-red-400 hover:bg-red-500/15 hover:shadow-[0_0_22px_rgba(239,68,68,0.6)] hover:border-red-500/90';
       case 'instagram':
-        return 'border-pink-500/40 text-pink-400 hover:bg-pink-500/10 hover:shadow-[0_0_18px_rgba(236,72,153,0.5)] hover:border-pink-500/80';
+        return 'border-pink-500/40 text-pink-400 hover:bg-pink-500/15 hover:shadow-[0_0_22px_rgba(236,72,153,0.6)] hover:border-pink-500/90';
       case 'website':
       default:
-        return 'border-purple-500/40 text-purple-300 hover:bg-purple-500/10 hover:shadow-[0_0_18px_rgba(168,85,247,0.5)] hover:border-purple-500/80';
+        return 'border-purple-500/40 text-purple-300 hover:bg-purple-500/15 hover:shadow-[0_0_22px_rgba(168,85,247,0.6)] hover:border-purple-500/90';
     }
   };
 
@@ -63,7 +63,7 @@ export function LinkTreePreview() {
       </div>
 
       {/* Top Header with Status Indicator & Share Button */}
-      <header className="relative z-10 w-full max-w-xl flex items-center justify-between mb-6">
+      <header className="relative z-10 w-full max-w-md flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           {/* Status Live Indicator */}
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[11px] text-white/70 font-medium shadow-sm">
@@ -86,8 +86,8 @@ export function LinkTreePreview() {
         </button>
       </header>
 
-      {/* Main Profile & Links Container (Increased Width) */}
-      <main className="relative z-10 w-full max-w-xl flex-1 flex flex-col items-center">
+      {/* Main Profile & Links Container (Balanced Classic Size) */}
+      <main className="relative z-10 w-full max-w-md flex-1 flex flex-col items-center">
         {/* Profile Avatar with Halo Glow */}
         <div className="relative mb-4 group">
           <div
@@ -108,8 +108,8 @@ export function LinkTreePreview() {
         </div>
 
         {/* Status Pill Badge - Only "Data beats emotions" */}
-        <div className="mb-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 backdrop-blur-md border border-purple-500/30 text-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.15)]">
-          <Sparkles size={13} className="text-purple-400" />
+        <div className="mb-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 backdrop-blur-md border border-purple-500/30 text-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.15)]">
+          <Sparkles size={12} className="text-purple-400" />
           <span className="tracking-wide italic">&quot;Data beats emotions&quot;</span>
         </div>
 
@@ -123,7 +123,7 @@ export function LinkTreePreview() {
 
         {/* Bio */}
         {config.profile.bio && (
-          <p className="text-xs sm:text-sm text-white/75 text-center max-w-md mb-3 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-white/75 text-center max-w-sm mb-3 leading-relaxed font-normal">
             {config.profile.bio}
           </p>
         )}
@@ -136,29 +136,29 @@ export function LinkTreePreview() {
           </div>
         )}
 
-        {/* Social Icons Bar (with official hover colors) */}
+        {/* Enlarged Circle Social Icons Bar */}
         {activeSocials.length > 0 && (
-          <div className="flex items-center justify-center gap-3.5 flex-wrap mb-8">
+          <div className="flex items-center justify-center gap-4 sm:gap-5 flex-wrap mb-9">
             {activeSocials.map((social) => (
               <a
                 key={social.platform}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md border transition-all duration-300 hover:scale-110 shadow-md active:scale-95 ${getSocialBrandStyle(
+                className={`w-14 h-14 sm:w-15 sm:h-15 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-md border transition-all duration-300 hover:scale-115 shadow-lg active:scale-95 ${getSocialBrandStyle(
                   social.platform
                 )}`}
                 title={social.label || social.platform}
                 aria-label={social.label || social.platform}
               >
-                <SocialIconRenderer platform={social.platform} size={20} />
+                <SocialIconRenderer platform={social.platform} size={25} />
               </a>
             ))}
           </div>
         )}
 
-        {/* Links Stack (Enlarged Cards, Typography, and Icons) */}
-        <div className="w-full space-y-4 sm:space-y-4.5 mb-10">
+        {/* Links Stack (Brought Back to Original Balanced Size) */}
+        <div className="w-full space-y-3.5 mb-10">
           {activeLinks.length === 0 ? (
             <div className="p-8 text-center rounded-2xl bg-white/5 border border-dashed border-white/10 text-white/50 text-xs">
               No links available.
@@ -171,39 +171,39 @@ export function LinkTreePreview() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => recordClick(link.id)}
-                className={`group relative w-full p-4.5 sm:p-5 flex items-center gap-4 sm:gap-5 rounded-2xl transition-all duration-300 cursor-pointer text-left overflow-hidden select-none active:scale-[0.99] bg-[#0f111c]/80 backdrop-blur-xl border ${
+                className={`group relative w-full p-4 flex items-center gap-3.5 rounded-2xl transition-all duration-300 cursor-pointer text-left overflow-hidden select-none active:scale-[0.985] bg-[#0f111c]/75 backdrop-blur-xl border ${
                   link.isFeatured
-                    ? 'border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_28px_rgba(168,85,247,0.4)] ring-1 ring-purple-500/30'
-                    : 'border-slate-800/80 hover:border-purple-500/50 hover:bg-[#151928]/95 hover:shadow-[0_6px_24px_rgba(0,0,0,0.6)]'
+                    ? 'border-purple-500/40 hover:border-purple-400 hover:shadow-[0_0_24px_rgba(168,85,247,0.35)] ring-1 ring-purple-500/30'
+                    : 'border-slate-800/80 hover:border-purple-500/50 hover:bg-[#151928]/90 hover:shadow-[0_4px_20px_rgba(0,0,0,0.5)]'
                 }`}
               >
-                {/* Icon Container with Purple Glow (Enlarged) */}
-                <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0 transition-transform group-hover:scale-110 group-hover:bg-purple-500/20 group-hover:text-purple-300">
-                  <IconRenderer name={link.icon} size={24} />
+                {/* Icon Container with Purple Glow */}
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0 transition-transform group-hover:scale-110 group-hover:bg-purple-500/20 group-hover:text-purple-300">
+                  <IconRenderer name={link.icon} size={20} />
                 </div>
 
-                {/* Content: Title & Description (Enlarged Font) */}
+                {/* Content: Title & Description */}
                 <div className="flex-1 min-w-0 pr-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-base sm:text-lg font-bold text-white group-hover:text-purple-200 transition-colors tracking-tight">
+                    <span className="text-sm font-semibold text-white group-hover:text-purple-200 transition-colors">
                       {link.title}
                     </span>
                     {link.badge && (
-                      <span className="px-2.5 py-0.5 text-xs font-bold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 tracking-wide">
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 tracking-wide">
                         {link.badge}
                       </span>
                     )}
                   </div>
                   {link.description && (
-                    <p className="text-xs sm:text-[13px] text-white/70 mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-[11px] text-white/60 mt-0.5 line-clamp-2 leading-relaxed">
                       {link.description}
                     </p>
                   )}
                 </div>
 
-                {/* Right Arrow Indicator (Enlarged) */}
+                {/* Right Arrow Indicator */}
                 <div className="text-white/40 group-hover:text-purple-300 transition-colors shrink-0">
-                  <ExternalLink size={18} className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <ExternalLink size={15} className="opacity-70 group-hover:opacity-100 transition-opacity" />
                 </div>
               </a>
             ))
@@ -212,7 +212,7 @@ export function LinkTreePreview() {
       </main>
 
       {/* Clean Official Footer */}
-      <footer className="relative z-10 w-full max-w-xl pt-6 border-t border-white/10 text-center text-xs text-white/40 flex flex-col items-center gap-1.5">
+      <footer className="relative z-10 w-full max-w-md pt-6 border-t border-white/10 text-center text-xs text-white/40 flex flex-col items-center gap-1.5">
         <p className="font-medium text-white/60">
           © 2026 VCET. All rights reserved to VCET NSDC.
         </p>
