@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode';
+import React, { useState } from 'react';
+import Image from 'next/image';
 import { X, Copy, Check, Download, Share2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useConfig } from '@/context/ConfigContext';
@@ -12,24 +12,11 @@ interface QrCodeModalProps {
 }
 
 const SHARE_URL = 'https://nsdc-links.vercel.app/';
+const QR_IMAGE_PATH = '/qr-code.png';
 
 export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
   const { config, showToast } = useConfig();
-  const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    QRCode.toDataURL(SHARE_URL, {
-      width: 320,
-      margin: 2,
-      color: {
-        dark: '#0f172a',
-        light: '#ffffff',
-      },
-    })
-      .then((url) => setQrDataUrl(url))
-      .catch((err) => console.error('QR code generation error:', err));
-  }, []);
 
   if (!isOpen) return null;
 
@@ -52,10 +39,9 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
   };
 
   const handleDownloadQr = () => {
-    if (!qrDataUrl) return;
     const a = document.createElement('a');
-    a.href = qrDataUrl;
-    a.download = `${config.profile.name.toLowerCase().replace(/\s+/g, '-')}-qrcode.png`;
+    a.href = QR_IMAGE_PATH;
+    a.download = `vcet-nsdc-qrcode.png`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -106,21 +92,17 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
           </button>
         </div>
 
-        {/* QR Display */}
+        {/* Static QR Display */}
         <div className="flex flex-col items-center justify-center my-6">
           <div className="p-4 bg-white rounded-2xl shadow-xl ring-4 ring-white/10">
-            {qrDataUrl ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={qrDataUrl}
-                alt={`${config.profile.name} QR Code`}
-                className="w-48 h-48 rounded-lg"
-              />
-            ) : (
-              <div className="w-48 h-48 flex items-center justify-center text-slate-400 text-sm">
-                Generating QR...
-              </div>
-            )}
+            <Image
+              src={QR_IMAGE_PATH}
+              alt="VCET NSDC QR Code (https://nsdc-links.vercel.app/)"
+              width={192}
+              height={192}
+              priority
+              className="w-48 h-48 rounded-lg object-contain"
+            />
           </div>
           <p className="mt-3 text-xs text-[var(--text-secondary)] font-medium">
             Scan with phone camera to open {SHARE_URL}
