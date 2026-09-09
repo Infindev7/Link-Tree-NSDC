@@ -11,20 +11,16 @@ interface QrCodeModalProps {
   onClose: () => void;
 }
 
+const SHARE_URL = 'https://nsdc-links.vercel.app/';
+
 export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
   const { config, showToast } = useConfig();
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [copied, setCopied] = useState(false);
 
-  // Derive current URL safely without synchronous setState in useEffect
-  const currentUrl =
-    typeof window !== 'undefined'
-      ? window.location.origin + window.location.pathname
-      : 'https://vcet-nsdc.vercel.app/';
-
   useEffect(() => {
-    if (isOpen && currentUrl) {
-      QRCode.toDataURL(currentUrl, {
+    if (isOpen) {
+      QRCode.toDataURL(SHARE_URL, {
         width: 320,
         margin: 2,
         color: {
@@ -35,13 +31,13 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
         .then((url) => setQrDataUrl(url))
         .catch((err) => console.error('QR code generation error:', err));
     }
-  }, [isOpen, currentUrl]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(currentUrl);
+      await navigator.clipboard.writeText(SHARE_URL);
       setCopied(true);
       showToast('Profile link copied to clipboard!');
       try {
@@ -68,23 +64,23 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
     showToast('QR Code downloaded!');
   };
 
-  const shareText = `Check out ${config.profile.name}'s links & portfolio:`;
+  const shareText = `Check out ${config.profile.name}'s official links:`;
   const shareLinks = [
     {
       name: 'X (Twitter)',
-      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`,
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(SHARE_URL)}`,
     },
     {
       name: 'WhatsApp',
-      url: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${currentUrl}`)}`,
+      url: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${SHARE_URL}`)}`,
     },
     {
       name: 'LinkedIn',
-      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
+      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SHARE_URL)}`,
     },
     {
       name: 'Telegram',
-      url: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`,
+      url: `https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(shareText)}`,
     },
   ];
 
@@ -129,7 +125,7 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
             )}
           </div>
           <p className="mt-3 text-xs text-[var(--text-secondary)] font-medium">
-            Scan with phone camera to open profile
+            Scan with phone camera to open {SHARE_URL}
           </p>
         </div>
 
@@ -138,7 +134,7 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
           <input
             type="text"
             readOnly
-            value={currentUrl}
+            value={SHARE_URL}
             className="flex-1 bg-transparent px-2 text-xs text-[var(--text-secondary)] font-mono outline-none truncate"
           />
           <button
