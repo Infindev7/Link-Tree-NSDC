@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useConfig } from '@/context/ConfigContext';
 import { IconRenderer, SocialIconRenderer } from './common/IconRenderer';
 import { QrCodeModal } from './common/QrCodeModal';
@@ -96,9 +97,12 @@ export function LinkTreePreview() {
               boxShadow: '0 0 30px -4px rgba(168, 85, 247, 0.45)',
             }}
           >
-            <img
+            <Image
               src={config.profile.avatarUrl}
               alt={config.profile.name}
+              width={112}
+              height={112}
+              priority
               className="w-full h-full object-contain"
             />
           </div>

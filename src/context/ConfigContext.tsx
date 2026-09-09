@@ -11,8 +11,6 @@ interface ToastMessage {
   type: 'success' | 'info' | 'error';
 }
 
-const STORAGE_KEY = 'vcet_nsdc_linktree_user_config_v4';
-
 interface ConfigContextType {
   config: LinkTreeConfig;
   toast: ToastMessage | null;

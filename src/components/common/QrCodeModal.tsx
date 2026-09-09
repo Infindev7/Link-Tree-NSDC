@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
 import { X, Copy, Check, Download, Share2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -15,13 +15,12 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
   const { config, showToast } = useConfig();
   const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [copied, setCopied] = useState(false);
-  const [currentUrl, setCurrentUrl] = useState('');
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.origin + window.location.pathname);
-    }
-  }, []);
+  // Derive current URL safely without synchronous setState in useEffect
+  const currentUrl =
+    typeof window !== 'undefined'
+      ? window.location.origin + window.location.pathname
+      : 'https://vcet-nsdc.vercel.app/';
 
   useEffect(() => {
     if (isOpen && currentUrl) {
@@ -117,6 +116,7 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
         <div className="flex flex-col items-center justify-center my-6">
           <div className="p-4 bg-white rounded-2xl shadow-xl ring-4 ring-white/10">
             {qrDataUrl ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={qrDataUrl}
                 alt={`${config.profile.name} QR Code`}
