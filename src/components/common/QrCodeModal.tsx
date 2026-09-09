@@ -19,19 +19,17 @@ export function QrCodeModal({ isOpen, onClose }: QrCodeModalProps) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      QRCode.toDataURL(SHARE_URL, {
-        width: 320,
-        margin: 2,
-        color: {
-          dark: '#0f172a',
-          light: '#ffffff',
-        },
-      })
-        .then((url) => setQrDataUrl(url))
-        .catch((err) => console.error('QR code generation error:', err));
-    }
-  }, [isOpen]);
+    QRCode.toDataURL(SHARE_URL, {
+      width: 320,
+      margin: 2,
+      color: {
+        dark: '#0f172a',
+        light: '#ffffff',
+      },
+    })
+      .then((url) => setQrDataUrl(url))
+      .catch((err) => console.error('QR code generation error:', err));
+  }, []);
 
   if (!isOpen) return null;
 

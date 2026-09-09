@@ -222,7 +222,7 @@ export function LinkTreePreview() {
       </footer>
 
       {/* Share / QR Code Modal */}
-      <QrCodeModal isOpen={isQrOpen} onClose={() => setIsQrOpen(false)} />
+      {isQrOpen && <QrCodeModal isOpen={isQrOpen} onClose={() => setIsQrOpen(false)} />}
     </div>
   );
 }
