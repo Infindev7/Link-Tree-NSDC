@@ -17,7 +17,7 @@ export const DEFAULT_CONFIG: LinkTreeConfig = {
     handle: '@vcet.nsdc',
     bio: 'Official National Student Data Corps Student Chapter of VCET Artificial Intelligence & Data Science Department. Fostering budding AI Engineers & Data Scientists.',
     avatarUrl: VCET_NSDC_LOGO,
-    badgeText: '"Data beats emotions" • VCET AI&DS',
+    badgeText: '"Data beats emotions"',
     showBadge: true,
     location: "Vidyavardhini's College of Engineering & Tech, Vasai",
   },
