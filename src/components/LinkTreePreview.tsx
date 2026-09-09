@@ -8,7 +8,6 @@ import { QrCodeModal } from './common/QrCodeModal';
 import {
   Share2,
   ExternalLink,
-  CheckCircle2,
   MapPin,
   Sparkles,
 } from 'lucide-react';
@@ -105,14 +104,6 @@ export function LinkTreePreview() {
               priority
               className="w-full h-full object-contain"
             />
-          </div>
-
-          {/* Verified Badge Icon */}
-          <div
-            className="absolute bottom-0 right-0 p-1 rounded-full bg-black/90 text-purple-400 border border-purple-400/50 shadow-md"
-            title="Verified Official Chapter"
-          >
-            <CheckCircle2 size={16} fill="currentColor" className="text-black" />
           </div>
         </div>
 
