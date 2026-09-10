@@ -9,6 +9,7 @@ export type SocialPlatformType =
   | 'spotify'
   | 'twitch'
   | 'telegram'
+  | 'whatsapp'
   | 'threads'
   | 'website';
 

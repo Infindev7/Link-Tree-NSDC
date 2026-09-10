@@ -9,7 +9,6 @@ import {
   Share2,
   ExternalLink,
   MapPin,
-  Sparkles,
 } from 'lucide-react';
 
 export function LinkTreePreview() {
@@ -34,6 +33,15 @@ export function LinkTreePreview() {
       default:
         return 'border-purple-500/40 text-purple-300 hover:bg-purple-500/15 hover:shadow-[0_0_22px_rgba(168,85,247,0.6)] hover:border-purple-500/90';
     }
+  };
+
+  const getSocialHref = (social: { platform: string; url: string }) => {
+    if (social.platform === 'email') {
+      const email = social.url.replace(/^mailto:/, '');
+      if (email.startsWith('http')) return email;
+      return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+    }
+    return social.url;
   };
 
   return (
@@ -62,19 +70,8 @@ export function LinkTreePreview() {
         />
       </div>
 
-      {/* Top Header with Status Indicator & Share Button */}
-      <header className="relative z-10 w-full max-w-md flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          {/* Status Live Indicator */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[11px] text-white/70 font-medium shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            <span>VCET NSDC Chapter</span>
-          </div>
-        </div>
-
+      {/* Top Header with Share Button */}
+      <header className="relative z-10 w-full max-w-md flex items-center justify-end mb-6">
         {/* Share Modal Trigger Button */}
         <button
           onClick={() => setIsQrOpen(true)}
@@ -86,55 +83,40 @@ export function LinkTreePreview() {
         </button>
       </header>
 
-      {/* Main Profile & Links Container (Balanced Classic Size) */}
+      {/* Main Profile & Links Container */}
       <main className="relative z-10 w-full max-w-md flex-1 flex flex-col items-center">
-        {/* Profile Avatar with Halo Glow */}
-        <div className="relative mb-4 group">
-          <div
-            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden p-2 shadow-2xl transition-transform duration-300 group-hover:scale-105 border-2 border-purple-400/80 bg-black/80"
-            style={{
-              boxShadow: '0 0 30px -4px rgba(168, 85, 247, 0.45)',
-            }}
-          >
+        {/* Pic 1 VCET NSDC Logo (Enlarged & Proportional) */}
+        <div className="flex items-center justify-center gap-4 sm:gap-5 mb-4 select-none transition-transform duration-300 hover:scale-[1.02]">
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0">
             <Image
-              src={config.profile.avatarUrl}
-              alt={config.profile.name}
+              src="/Logo.png"
+              alt="VCET NSDC Logo"
               width={112}
               height={112}
               priority
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain drop-shadow-[0_0_24px_rgba(168,85,247,0.45)]"
             />
           </div>
-        </div>
-
-        {/* Status Pill Badge - Only "Data beats emotions" */}
-        <div className="mb-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 backdrop-blur-md border border-purple-500/30 text-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.15)]">
-          <Sparkles size={12} className="text-purple-400" />
-          <span className="tracking-wide italic">&quot;Data beats emotions&quot;</span>
-        </div>
-
-        {/* Name with VCET NSDC Signature Gradient & Wide Sans-Serif Font */}
-        <h1 className="text-2xl sm:text-3xl font-black font-title-wide tracking-wider text-center bg-gradient-to-r from-purple-400 via-violet-300 to-blue-400 bg-clip-text text-transparent uppercase">
-          {config.profile.name}
-        </h1>
-        <p className="text-sm font-medium text-purple-300/80 mt-0.5 mb-3 tracking-wide">
-          {config.profile.handle}
-        </p>
-
-        {/* Bio */}
-        {config.profile.bio && (
-          <p className="text-xs sm:text-sm text-white/75 text-center max-w-sm mb-3 leading-relaxed font-normal">
-            {config.profile.bio}
-          </p>
-        )}
-
-        {/* Location Tag */}
-        {config.profile.location && (
-          <div className="flex items-center gap-1.5 text-[11px] text-white/50 font-medium mb-6">
-            <MapPin size={12} className="text-purple-400" />
-            <span>{config.profile.location}</span>
+          <div className="flex flex-col justify-center text-left leading-none text-white">
+            <span
+              className="text-xl sm:text-2xl font-normal tracking-wide text-white/95"
+              style={{ fontFamily: 'Georgia, Cambria, serif' }}
+            >
+              VCET
+            </span>
+            <span
+              className="text-5xl sm:text-6xl font-bold tracking-tight text-white -mt-1"
+              style={{ fontFamily: 'Georgia, Cambria, serif' }}
+            >
+              NSDC
+            </span>
           </div>
-        )}
+        </div>
+
+        {/* Subtitle Quote */}
+        <p className="text-sm sm:text-base text-purple-300/90 italic text-center tracking-wide mb-6">
+          &ldquo;Data beats emotions.&rdquo;
+        </p>
 
         {/* Enlarged Circle Social Icons Bar */}
         {activeSocials.length > 0 && (
@@ -142,7 +124,7 @@ export function LinkTreePreview() {
             {activeSocials.map((social) => (
               <a
                 key={social.platform}
-                href={social.url}
+                href={getSocialHref(social)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-14 h-14 sm:w-15 sm:h-15 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-md border transition-all duration-300 hover:scale-115 shadow-lg active:scale-95 ${getSocialBrandStyle(
@@ -216,9 +198,10 @@ export function LinkTreePreview() {
         <p className="font-medium text-white/60">
           © 2026 VCET. All rights reserved to VCET NSDC.
         </p>
-        <p className="text-[11px] text-white/40">
-          Vidyavardhini&apos;s College of Engineering and Technology, Vasai Road (W)
-        </p>
+        <div className="flex items-center justify-center gap-1.5 text-[11px] text-white/50 font-medium">
+          <MapPin size={12} className="text-purple-400 shrink-0" />
+          <span>Vidyavardhini&apos;s College of Engineering and Technology, Vasai Road (W)</span>
+        </div>
       </footer>
 
       {/* Share / QR Code Modal */}
