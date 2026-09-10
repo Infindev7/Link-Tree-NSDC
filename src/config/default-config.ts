@@ -15,16 +15,16 @@ export const DEFAULT_CONFIG: LinkTreeConfig = {
   profile: {
     name: 'VCET NSDC',
     handle: '@vcet.nsdc',
-    bio: 'Official National Student Data Corps Student Chapter of VCET Artificial Intelligence & Data Science Department. Fostering budding AI Engineers & Data Scientists.',
+    bio: '',
     avatarUrl: VCET_NSDC_LOGO,
-    badgeText: '"Data beats emotions"',
+    badgeText: '"Data beats emotions."',
     showBadge: true,
-    location: "Vidyavardhini's College of Engineering & Tech, Vasai",
+    location: "Vidyavardhini's College of Engineering and Technology, Vasai Road (W)",
   },
   socials: [
     {
       platform: 'email',
-      url: 'mailto:nsdc@vcet.edu.in',
+      url: 'https://mail.google.com/mail/?view=cm&fs=1&to=nsdc@vcet.edu.in',
       enabled: true,
       label: 'Email',
     },
